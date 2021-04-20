@@ -4,47 +4,78 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody))]
-public class Movement : MonoBehaviour
+public class Movement : MonoBehaviour, IMechComponent
 {
+    private Mech mech;
     private Vector3 input;
     private Rigidbody _rigidbody;
-    float speed = 20;
-    float rotationSpeed = 2;
-    float coeficientOfAcceleration = 0;
+    private float maxSpeed = 20;
+    private float speed = 0;
+    float rotationSpeed = 5;
+    float coeficientOfAcceleration = 10;
+    float dempingSpeed = 100;
 
-    public void Start()
+    public float Speed 
+    {
+        get => speed;
+        set => speed = Mathf.Clamp(value, 0, maxSpeed);
+    }
+
+    public void Awake()
     {
         TryGetComponent<Rigidbody>(out _rigidbody);
+        if (!_rigidbody)
+        {
+            Debug.LogError("Can't find Rigidbody component at " + gameObject.name);
+        }
+    }
+
+    public void SetMech(Mech mech)
+    {
+        this.mech = mech;
+    }
+
+    public void Setup()
+    {
+
     }
 
     public void Move(Vector3 direction)
     {
-        Vector3 movement;
-        DoRotation(direction);
-        Vector3 newDirection = GetCurrentDirection();
-        float currentSpeed = _rigidbody.velocity.magnitude;
-        float differenceAngle = Vector3.Angle(_rigidbody.velocity, direction);
-        if (differenceAngle < 90f)
+        float pressPower = direction.normalized.magnitude;
+
+        Accelerate(pressPower > 0.2f);
+        Vector3 moveDirection;
+        var coefficient = Speed / maxSpeed;
+        Debug.Log(coefficient);
+        if (coefficient < 0.7f)
         {
-            if (currentSpeed < speed)
-            {
-                currentSpeed += 10 * Time.deltaTime;
-            }
-            movement = currentSpeed * newDirection;
+            moveDirection = direction;
+        }
+        else 
+        {
+            moveDirection = GetCurrentDirection();
+        }
+
+        DoRotation(direction, 1 - coefficient);
+        _rigidbody.velocity = Speed * moveDirection;
+    }
+
+    private void Accelerate(bool speedUp)
+    {
+        if (speedUp)
+        {
+            speed += coeficientOfAcceleration * Time.deltaTime;
         }
         else
         {
-            currentSpeed -= 20 * Time.deltaTime;
-            movement = currentSpeed * direction;
+            speed -= dempingSpeed * Time.deltaTime;
         }
-
-        
-        _rigidbody.velocity = movement;
     }
 
-    private void DoRotation(Vector3 direction)
+    private void DoRotation(Vector3 direction, float rotationCoeficient)
     {
-        var angle = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
+        var angle = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), rotationCoeficient * rotationSpeed * Time.deltaTime);
         transform.rotation = angle;
     }
 
