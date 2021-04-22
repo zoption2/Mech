@@ -26,6 +26,11 @@ public class MechAnimationHandler : MonoBehaviour, IMechComponent
         mech.OnStateChange += DoAnimation;
     }
 
+    private void Statemant(float param)
+    {
+        animator.SetFloat(animation_idle, param);
+    }
+
     private void DoAnimation(MechState state)
     {
         switch (state)

@@ -26,4 +26,13 @@ public class MoveControl : MonoBehaviour
                        movement.Move(input);
                    });
     }
+
+    protected virtual void InitStateObservarable()
+    {
+        this.UpdateAsObservable().Subscribe(x =>
+        {
+            movement.ControlState();
+        }
+        );
+    }
 }

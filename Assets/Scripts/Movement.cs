@@ -40,38 +40,43 @@ public class Movement : MonoBehaviour, IMechComponent
 
     }
 
+    public void ControlState()
+    {
+        if (Speed > 1)
+        {
+            mech.SetMechState(MechState.Driving);
+        }
+        else
+        {
+            mech.SetMechState(MechState.Standing);
+        }
+    }
+
     public void Move(Vector3 direction)
     {
-        float pressPower = direction.normalized.magnitude;
+        Accelerate(direction != Vector3.zero);
 
-        Accelerate(pressPower > 0.2f);
-        Vector3 moveDirection;
         var coefficient = Speed / maxSpeed;
-        Debug.Log(coefficient);
-        if (coefficient < 0.7f)
-        {
-            moveDirection = direction;
-        }
-        else 
-        {
-            moveDirection = GetCurrentDirection();
-        }
 
         DoRotation(direction, 1 - coefficient);
-        _rigidbody.velocity = Speed * moveDirection;
+        _rigidbody.velocity = Speed * direction;
     }
 
     private void Accelerate(bool speedUp)
     {
         if (speedUp)
         {
-            speed += coeficientOfAcceleration * Time.deltaTime;
+            Speed += coeficientOfAcceleration * Time.deltaTime;
+            Debug.Log("Up - " + Speed);
         }
         else
         {
-            speed -= dempingSpeed * Time.deltaTime;
+            Speed -= dempingSpeed * Time.deltaTime;
+            Debug.Log("Down - " + Speed);
         }
+
     }
+
 
     private void DoRotation(Vector3 direction, float rotationCoeficient)
     {
