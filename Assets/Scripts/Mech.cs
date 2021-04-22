@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Mech : MonoBehaviour
+public class Mech : Character
 {
     public UnityAction<MechState> OnStateChange;
     private MechState state;
