@@ -27,4 +27,10 @@ public class MechStateHandler : MonoBehaviour, IMechComponent
         s_dead = new MechDeadState(mech, stateMachine);
     }
 
+    public MechStates CurrentState { get => state; }
+
+    private void DoOnStateChange()
+    {
+        mech.OnStateChange?.Invoke(CurrentState);
+    }
 }

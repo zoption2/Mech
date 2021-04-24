@@ -28,25 +28,26 @@ public class MechAnimationHandler : MonoBehaviour, IMechComponent
         animator.SetFloat(animation_idle, param);
     }
 
-    private void DoAnimation(MechState state)
+    private void DoAnimation(MechStates state)
     {
         switch (state)
         {
-            case MechState.Standing:
-                animator.Play(animation_idle);
+            case MechStates.NonCombat:
                 break;
-            case MechState.Driving:
-                animator.Play(animation_Driving);
+            case MechStates.Combat:
                 break;
-            case MechState.Fighting:
+            case MechStates.Waiting:
                 break;
-            case MechState.Dying:
+            case MechStates.Researching:
                 break;
-            case MechState.Disabling:
+            case MechStates.Stasis:
                 break;
-            case MechState.Trading:
+            case MechStates.Dead:
+                break;
+            case MechStates.Trading:
                 break;
             default:
+                Debug.LogError("Mech states has not containe state: " + state.ToString());
                 break;
         }
     }

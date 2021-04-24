@@ -35,19 +35,6 @@ public class Movement : MonoBehaviour, IMechComponent
         this.mech = mech;
     }
 
-
-    public void ControlState()
-    {
-        if (Speed > 1)
-        {
-            mech.SetMechState(MechState.Driving);
-        }
-        else
-        {
-            mech.SetMechState(MechState.Standing);
-        }
-    }
-
     public void Move(Vector3 direction)
     {
         Accelerate(direction != Vector3.zero);

@@ -5,24 +5,23 @@ using UnityEngine.Events;
 
 public class Mech : Character
 {
-    public UnityAction<MechState> OnStateChange;
-    private MechState state;
+    public UnityAction<MechStates> OnStateChange;
 
-    private Movement movement;
-    private MechStateHandler stateHandler;
-    private MechAnimationHandler animationHandler;
+    public Movement movement;
+    public MechStateHandler stateHandler;
+    public MechAnimationHandler animationHandler;
+    
 
     private void Start()
     {
         InitiateComponents();
     }
 
-    public void SetMechState(MechState state)
+    public MechStates GetCurrentState()
     {
-        this.state = state;
-        DoOnStateChange();
+        return stateHandler.CurrentState;
     }
-
+    
     private void InitiateComponents()
     {
         List<IMechComponent> components = new List<IMechComponent>();
@@ -30,8 +29,4 @@ public class Mech : Character
         components.ForEach(s => s.InitComponent(this));
     }
 
-    private void DoOnStateChange()
-    {
-        OnStateChange?.Invoke(state);
-    }
 }
