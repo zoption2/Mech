@@ -10,6 +10,7 @@ public class MovementHandler : MonoBehaviour, IMechComponent
     private Rigidbody _rigidbody;
     private Movement movement;
 
+    public float Speed { get => _rigidbody.velocity.magnitude; }
 
     public void Awake()
     {

@@ -23,6 +23,7 @@ public class MechNonCombatState : MechState
         base.MovementUpdate();
         inputs = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         character.movement.Move(inputs);
+        character.animationHandler.animator.SetFloat("speed", character.movement.Speed);
     }
 
 

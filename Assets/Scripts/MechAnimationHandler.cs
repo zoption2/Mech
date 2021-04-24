@@ -6,7 +6,7 @@ using UnityEngine;
 public class MechAnimationHandler : MonoBehaviour, IMechComponent
 {
     private Mech mech;
-    private Animator animator;
+    public Animator animator;
 
     private const string animation_idle = "Mech_IDLE";
     private const string animation_Driving = "Mech_Driving";
@@ -24,7 +24,7 @@ public class MechAnimationHandler : MonoBehaviour, IMechComponent
 
     public void Setup()
     {
-        mech.OnStateChange += DoAnimation;
+       // mech.OnStateChange += DoAnimation;
     }
 
 
