@@ -8,13 +8,22 @@ public class MechNonCombatState : MechState
     protected float speed;
     protected float rotationSpeed;
 
-    private Vector3 inputs;
+    protected Vector3 inputs;
 
     private bool isAttack;
+    private bool isMoving;
 
     public MechNonCombatState(Mech character, StateMachine stateMachine) : base(character, stateMachine)
     {
 
     }
+
+    public override void MovementUpdate()
+    {
+        base.MovementUpdate();
+        inputs = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        character.movement.Move(inputs);
+    }
+
 
 }

@@ -3,6 +3,7 @@
     NonCombat,
     Combat,
     Waiting,
+    Moving,
     Researching,
     Stasis,
     Dead,

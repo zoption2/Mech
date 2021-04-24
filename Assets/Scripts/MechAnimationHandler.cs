@@ -43,6 +43,8 @@ public class MechAnimationHandler : MonoBehaviour, IMechComponent
                 break;
             case MechStates.Waiting:
                 break;
+            case MechStates.Moving:
+                break;
             case MechStates.Researching:
                 break;
             case MechStates.Stasis:

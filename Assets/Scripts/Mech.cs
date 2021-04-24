@@ -25,7 +25,7 @@ public class Mech : Character
     {
         return stateHandler.CurrentState;
     }
-    
+  
     private void InitiateComponents()
     {
         List<IMechComponent> components = new List<IMechComponent>();

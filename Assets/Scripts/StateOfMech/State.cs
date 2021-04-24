@@ -24,7 +24,7 @@ public abstract class State
         DebugTest();
     }
 
-    public virtual void Input()
+    public virtual void MovementUpdate()
     {
 
     }

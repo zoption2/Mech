@@ -8,12 +8,12 @@ using UniRx.Triggers;
 public class MoveControl : MonoBehaviour
 {
     private Vector3 input;
-    private MovementHandler movement;
+    private Mech mech;
 
     private void Start()
     {
-        TryGetComponent<MovementHandler>(out movement);
-        InitMoveObserverable();
+        TryGetComponent<Mech>(out mech);
+        InitStateObservarable();
     }
 
     protected virtual void InitMoveObserverable()
@@ -23,7 +23,7 @@ public class MoveControl : MonoBehaviour
                    .Subscribe(x =>
                    {
                        input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-                       movement.Move(input);
+                       
                    });
     }
 
@@ -31,7 +31,7 @@ public class MoveControl : MonoBehaviour
     {
         this.UpdateAsObservable().Subscribe(x =>
         {
-            
+            mech.stateHandler.MovementUpdate();
         }
         );
     }
