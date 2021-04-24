@@ -16,15 +16,12 @@ public class MechAnimationHandler : MonoBehaviour, IMechComponent
         CheckAnimator();
     }
 
-    public void SetMech(Mech mech)
+    public void InitComponent(Mech mech)
     {
         this.mech = mech;
-    }
-
-    public void Setup()
-    {
         mech.OnStateChange += DoAnimation;
     }
+
 
     private void Statemant(float param)
     {

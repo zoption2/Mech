@@ -7,6 +7,7 @@ public abstract class State
     protected Character character;
     protected StateMachine stateMachine;
 
+
     public State(Character character, StateMachine stateMachine)
     {
         this.character = character;

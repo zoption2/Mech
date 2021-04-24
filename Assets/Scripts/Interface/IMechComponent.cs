@@ -2,6 +2,5 @@
 
 public interface IMechComponent
 {
-    void SetMech(Mech mech);
-    void Setup();
+    void InitComponent(Mech mech);
 }

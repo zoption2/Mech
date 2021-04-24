@@ -30,15 +30,11 @@ public class Movement : MonoBehaviour, IMechComponent
         }
     }
 
-    public void SetMech(Mech mech)
+    public void InitComponent(Mech mech)
     {
         this.mech = mech;
     }
 
-    public void Setup()
-    {
-
-    }
 
     public void ControlState()
     {
