@@ -90,11 +90,11 @@ GameObject:
   - component: {fileID: 2003766948681551775}
   - component: {fileID: 7165234378343419953}
   - component: {fileID: 1090744517810465608}
-  - component: {fileID: 5813402911213356014}
   - component: {fileID: 7129911945410333682}
   - component: {fileID: 1458521020758514874}
   - component: {fileID: 2007336290414732354}
   - component: {fileID: 9189231300860056552}
+  - component: {fileID: 2713723626482314451}
   m_Layer: 0
   m_Name: Mech
   m_TagString: Untagged
@@ -152,18 +152,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &5813402911213356014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2003766948681388991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cfbe7621d5a6434786a17a9ffb19c4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7129911945410333682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,3 +203,15 @@ MonoBehaviour:
   movement: {fileID: 0}
   stateHandler: {fileID: 0}
   animationHandler: {fileID: 0}
+--- !u!114 &2713723626482314451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003766948681388991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e8e5762459dba42839c0807d84be65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

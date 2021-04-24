@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(Rigidbody))]
-public class Movement : MonoBehaviour, IMechComponent
+public abstract class Movement
 {
-    private Mech mech;
-    private Vector3 input;
-    private Rigidbody _rigidbody;
+
     private float maxSpeed = 20;
-    private float speed = 0;
+    private float speed = 10;
     float rotationSpeed = 5;
     float coeficientOfAcceleration = 10;
     float dempingSpeed = 100;
@@ -21,35 +18,7 @@ public class Movement : MonoBehaviour, IMechComponent
         set => speed = Mathf.Clamp(value, 0, maxSpeed);
     }
 
-    public void Awake()
-    {
-        TryGetComponent<Rigidbody>(out _rigidbody);
-        if (!_rigidbody)
-        {
-            Debug.LogError("Can't find Rigidbody component at " + gameObject.name);
-        }
-    }
-
-    public void ConnectWithMech(Mech mech)
-    {
-        this.mech = mech;
-        mech.movement = this;
-    }
-
-    public void Setup()
-    {
-
-    }
-
-    public void Move(Vector3 direction)
-    {
-        Accelerate(direction != Vector3.zero);
-
-        var coefficient = Speed / maxSpeed;
-
-        DoRotation(direction, 1 - coefficient);
-        _rigidbody.velocity = Speed * direction;
-    }
+    public abstract void Move(Transform transform, Vector3 direction, Rigidbody rigidbody);
 
     private void Accelerate(bool speedUp)
     {
@@ -67,13 +36,13 @@ public class Movement : MonoBehaviour, IMechComponent
     }
 
 
-    private void DoRotation(Vector3 direction, float rotationCoeficient)
+    protected void DoRotation(Transform transform, Vector3 direction, float rotationSpeed)
     {
-        var angle = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), rotationCoeficient * rotationSpeed * Time.deltaTime);
+        var angle = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
         transform.rotation = angle;
     }
 
-    private Vector3 GetCurrentDirection()
+    protected Vector3 GetCurrentDirection(Transform transform)
     {
         Vector3 currentDirection = transform.forward;
         return currentDirection;

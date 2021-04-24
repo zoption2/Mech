@@ -8,11 +8,11 @@ using UniRx.Triggers;
 public class MoveControl : MonoBehaviour
 {
     private Vector3 input;
-    private Movement movement;
+    private MovementHandler movement;
 
     private void Start()
     {
-        TryGetComponent<Movement>(out movement);
+        TryGetComponent<MovementHandler>(out movement);
         InitMoveObserverable();
     }
 

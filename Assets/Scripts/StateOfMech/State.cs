@@ -14,9 +14,14 @@ public abstract class State
         this.stateMachine = stateMachine;
     }
 
+    private void DebugTest()
+    {
+        Debug.Log("Current State = " + this.GetType().Name);
+    }
+
     public virtual void Enter()
     {
-
+        DebugTest();
     }
 
     public virtual void Input()
