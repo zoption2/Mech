@@ -9,5 +9,5 @@ public class MechWaitingState : MechNonCombatState
 
     }
 
-    protected override MechStates State => MechStates.Waiting;
+    public override MechStates State => MechStates.Waiting;
 }

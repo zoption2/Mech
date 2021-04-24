@@ -30,9 +30,15 @@ public class Movement : MonoBehaviour, IMechComponent
         }
     }
 
-    public void InitComponent(Mech mech)
+    public void ConnectWithMech(Mech mech)
     {
         this.mech = mech;
+        mech.movement = this;
+    }
+
+    public void Setup()
+    {
+
     }
 
     public void Move(Vector3 direction)

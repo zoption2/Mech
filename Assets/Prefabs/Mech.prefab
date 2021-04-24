@@ -92,6 +92,9 @@ GameObject:
   - component: {fileID: 1090744517810465608}
   - component: {fileID: 5813402911213356014}
   - component: {fileID: 7129911945410333682}
+  - component: {fileID: 1458521020758514874}
+  - component: {fileID: 2007336290414732354}
+  - component: {fileID: 9189231300860056552}
   m_Layer: 0
   m_Name: Mech
   m_TagString: Untagged
@@ -173,3 +176,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbff5813ee193774fbd54a9a3c19ae0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1458521020758514874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003766948681388991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6951100b0c15741a820ee77888ae94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2007336290414732354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003766948681388991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e075e76665ad65a4aaff042864ceb0f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9189231300860056552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003766948681388991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae1220b5e35f6141b252313c17eea1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 0}
+  stateHandler: {fileID: 0}
+  animationHandler: {fileID: 0}

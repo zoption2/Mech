@@ -9,5 +9,5 @@ public class MechDeadState : MechState
 
     }
 
-    protected override MechStates State => MechStates.Dead;
+    public override MechStates State => MechStates.Dead;
 }

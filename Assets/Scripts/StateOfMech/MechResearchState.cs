@@ -9,5 +9,5 @@ public class MechResearchState : MechNonCombatState
 
     }
 
-    protected override MechStates State => MechStates.Researching;
+    public override MechStates State => MechStates.Researching;
 }

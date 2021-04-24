@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MechNonCombatState : MechState
 {
-    protected override MechStates State { get => MechStates.NonCombat; }
+    public override MechStates State { get => MechStates.NonCombat; }
     protected float speed;
     protected float rotationSpeed;
 

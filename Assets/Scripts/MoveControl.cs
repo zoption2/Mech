@@ -31,7 +31,7 @@ public class MoveControl : MonoBehaviour
     {
         this.UpdateAsObservable().Subscribe(x =>
         {
-            movement.ControlState();
+            
         }
         );
     }

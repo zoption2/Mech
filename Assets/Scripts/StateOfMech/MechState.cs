@@ -4,10 +4,12 @@ using UnityEngine;
 
 public abstract class MechState : State
 {
+    public abstract MechStates State { get; }
+
     public MechState(Mech character, StateMachine stateMachine) : base(character, stateMachine)
     {
 
     }
 
-    protected abstract MechStates State { get;}
+
 }
