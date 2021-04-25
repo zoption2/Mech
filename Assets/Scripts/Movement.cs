@@ -5,34 +5,35 @@ using UnityEngine;
 
 public abstract class Movement
 {
-
-    private float maxSpeed = 20;
-    private float speed = 10;
-    float rotationSpeed = 5;
-    float coeficientOfAcceleration = 10;
-    float dempingSpeed = 100;
-
-    public float Speed 
+    public Movement(Stats stats)
     {
-        get => speed;
-        set => speed = Mathf.Clamp(value, 0, maxSpeed);
+        this.stats = stats;
     }
+
+    private Stats stats;
+
 
     public abstract void Move(Transform transform, Vector3 direction, Rigidbody rigidbody);
 
-    private void Accelerate(bool speedUp)
+    protected float Accelerate(float currentSpeed)
     {
-        if (speedUp)
+        if (currentSpeed < stats.MaxSpeed)
         {
-            Speed += coeficientOfAcceleration * Time.deltaTime;
-            Debug.Log("Up - " + Speed);
+            currentSpeed += stats.Acceleration * Time.deltaTime;
+            float speedLimit = Mathf.Clamp(currentSpeed, 0, stats.MaxSpeed);
+            return speedLimit;
         }
         else
         {
-            Speed -= dempingSpeed * Time.deltaTime;
-            Debug.Log("Down - " + Speed);
+            return currentSpeed;
         }
+    }
 
+    protected float SlowDown(float currentSpeed)
+    {
+        currentSpeed -= stats.SlowDown * Time.deltaTime;
+        float speedLimit = Mathf.Clamp(currentSpeed, 0, stats.MaxSpeed);
+        return speedLimit;
     }
 
 
@@ -47,6 +48,4 @@ public abstract class Movement
         Vector3 currentDirection = transform.forward;
         return currentDirection;
     }
-
-
 }

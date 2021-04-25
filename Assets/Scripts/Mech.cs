@@ -6,14 +6,16 @@ using UnityEngine.Events;
 [RequireComponent(typeof(MovementHandler))]
 [RequireComponent(typeof(MechStateHandler))]
 [RequireComponent(typeof(MechAnimationHandler))]
+[RequireComponent(typeof(StatsHandler))]
 
 public class Mech : Character
 {
     public UnityAction<MechStates> OnStateChange;
 
-    [HideInInspector] public MovementHandler movement;
+    [HideInInspector] public MovementHandler movementHandler;
     [HideInInspector] public MechStateHandler stateHandler;
     [HideInInspector] public MechAnimationHandler animationHandler;
+    [HideInInspector] public StatsHandler statsHandler;
 
 
     private void Start()

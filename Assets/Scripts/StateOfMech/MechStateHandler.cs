@@ -84,11 +84,6 @@ public class MechStateHandler : MonoBehaviour, IMechComponent
         LogicUpdate();
     }
 
-    public void MovementUpdate()
-    {
-        stateMachine.CurrentState.MovementUpdate();
-    }
-
     public void LogicUpdate()
     {
         stateMachine.CurrentState.LogicUpdate();
@@ -98,8 +93,6 @@ public class MechStateHandler : MonoBehaviour, IMechComponent
     {
         stateMachine.CurrentState.PhysicsUpdate();
     }
-
-
 
     private void DoOnStateChange()
     {

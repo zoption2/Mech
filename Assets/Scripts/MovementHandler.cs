@@ -10,6 +10,7 @@ public class MovementHandler : MonoBehaviour, IMechComponent
     private Rigidbody _rigidbody;
     private Movement movement;
 
+
     public float Speed { get => _rigidbody.velocity.magnitude; }
 
     public void Awake()
@@ -24,33 +25,40 @@ public class MovementHandler : MonoBehaviour, IMechComponent
     public void ConnectWithMech(Mech mech)
     {
         this.mech = mech;
-        mech.movement = this;
+        mech.movementHandler = this;
     }
 
     public void Setup()
     {
-        ChangeMovementStyle(MoveStyle.NonCombat);
+        movement = new MoveNonCombat(mech.statsHandler.Stats);
+        mech.OnStateChange += ChangeMovementStyle;
     }
 
     public void Move(Vector3 direction)
     {
-        movement.Move(transform, direction, _rigidbody);
+        movement?.Move(transform, direction, _rigidbody);
+        Debug.Log("Current movement = " + movement.ToString());
     }
 
-    public void ChangeMovementStyle(MoveStyle moveStyle)
+    public void ChangeMovementStyle(MechStates state)
     {
-        switch (moveStyle)
+        switch (state)
         {
-            case MoveStyle.Combat:
+            case MechStates.NonCombat:
+                movement = new MoveNonCombat(mech.statsHandler.Stats);
                 break;
-            case MoveStyle.NonCombat:
-                movement = new MoveNonCombat();
+            case MechStates.Combat:
                 break;
-            case MoveStyle.Research:
+            case MechStates.Dead:
                 break;
             default:
-                Debug.LogError("There is no move style for " + moveStyle.ToString());
+                Debug.Log("Another state is a problem for me" + movement.ToString());
                 break;
         }
+    }
+
+    private void OnDestroy()
+    {
+        mech.OnStateChange -= ChangeMovementStyle;
     }
 }

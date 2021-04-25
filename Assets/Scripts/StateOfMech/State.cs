@@ -24,11 +24,6 @@ public abstract class State
         DebugTest();
     }
 
-    public virtual void MovementUpdate()
-    {
-
-    }
-
     public virtual void LogicUpdate()
     {
 
