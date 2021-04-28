@@ -13,17 +13,16 @@ public class MoveNonCombat : Movement
     {
         float currentSpeed = rigidbody.velocity.magnitude;
         float input = Mathf.Abs(direction.normalized.magnitude);
-        Debug.Log("Current inputs = " + input);
-        if (input < 0.2f)
+
+        if (input > 0.2f)
         {
-            currentSpeed = SlowDown(currentSpeed);
-        }
-        else
-        {
-            currentSpeed = Accelerate(currentSpeed);
+            float speed = Accelerate(currentSpeed);
+            currentSpeed = Mathf.Clamp(speed, 0, stats.MaxSpeed);
+            DoRotation(transform, direction, stats.RotationSpeed);
         }
 
-        rigidbody.velocity = direction * currentSpeed;
+
+        rigidbody.AddForce(direction * currentSpeed, ForceMode.Acceleration);
         Debug.Log("Current speed = " + currentSpeed);
     }
 }

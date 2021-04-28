@@ -9,10 +9,11 @@ public class StatsHandler : MonoBehaviour, IMechComponent
 
     public Stats Stats { get => stats; }
 
-    private void Start()
+    private void Awake()
     {
-        SetStats(new Stats());
+        stats = new Stats();
     }
+
     public void ConnectWithMech(Mech mech)
     {
         this.mech = mech;

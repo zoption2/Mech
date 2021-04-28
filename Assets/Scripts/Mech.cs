@@ -17,6 +17,7 @@ public class Mech : Character
     [HideInInspector] public MechAnimationHandler animationHandler;
     [HideInInspector] public StatsHandler statsHandler;
 
+    public bool IsReady = false;
 
     private void Start()
     {
@@ -34,6 +35,7 @@ public class Mech : Character
         GetComponents<IMechComponent>(components);
         components.ForEach(s => s.ConnectWithMech(this));
         components.ForEach(s => s.Setup());
+        IsReady = true;
     }
 
 }

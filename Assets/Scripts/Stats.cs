@@ -6,9 +6,9 @@ public class Stats
 {
     public Stats()
     {
-        MaxSpeed = 10f;
-        Acceleration = 20f;
-        RotationSpeed = 2f;
+        MaxSpeed = 30f;
+        Acceleration = 300f;
+        RotationSpeed = 1.5f;
         SpeedInCombat = 6;
         SlowDown = MaxSpeed;
     }

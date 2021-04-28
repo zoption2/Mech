@@ -36,7 +36,7 @@ public class MovementHandler : MonoBehaviour, IMechComponent
 
     public void Move(Vector3 direction)
     {
-        movement?.Move(transform, direction, _rigidbody);
+        movement.Move(transform, direction, _rigidbody);
         Debug.Log("Current movement = " + movement.ToString());
     }
 

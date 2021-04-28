@@ -10,30 +10,24 @@ public abstract class Movement
         this.stats = stats;
     }
 
-    private Stats stats;
+    protected Stats stats;
 
 
     public abstract void Move(Transform transform, Vector3 direction, Rigidbody rigidbody);
 
     protected float Accelerate(float currentSpeed)
     {
-        if (currentSpeed < stats.MaxSpeed)
-        {
-            currentSpeed += stats.Acceleration * Time.deltaTime;
-            float speedLimit = Mathf.Clamp(currentSpeed, 0, stats.MaxSpeed);
-            return speedLimit;
-        }
-        else
-        {
-            return currentSpeed;
-        }
+        float speed = currentSpeed;
+        speed += stats.Acceleration * Time.deltaTime;
+        return speed;
     }
 
     protected float SlowDown(float currentSpeed)
     {
-        currentSpeed -= stats.SlowDown * Time.deltaTime;
-        float speedLimit = Mathf.Clamp(currentSpeed, 0, stats.MaxSpeed);
-        return speedLimit;
+        var speed = currentSpeed;
+        speed -= stats.SlowDown * Time.deltaTime;
+        speed = Mathf.Clamp(speed, 0, stats.MaxSpeed);
+        return speed;
     }
 
 
@@ -45,7 +39,6 @@ public abstract class Movement
 
     protected Vector3 GetCurrentDirection(Transform transform)
     {
-        Vector3 currentDirection = transform.forward;
-        return currentDirection;
+        return transform.forward;
     }
 }

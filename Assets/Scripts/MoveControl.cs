@@ -9,14 +9,13 @@ public class MoveControl : MonoBehaviour
 {
     private Vector3 input;
     private Mech mech;
-    private float X = 0;
-    private float Y = 0;
+
 
     private void Start()
     {
         TryGetComponent<Mech>(out mech);
-        InitStateObservarable();
-        input = new Vector3(X, 0, Y);
+        //StartObservable();
+        InitMoveObserverable();
     }
 
     protected virtual void InitMoveObserverable()
@@ -26,17 +25,22 @@ public class MoveControl : MonoBehaviour
                    .Subscribe(x =>
                    {
                        input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-                       
+                       mech.movementHandler.Move(input);
                    });
     }
 
-    protected virtual void InitStateObservarable()
+    public void StartObservable()
     {
-        this.UpdateAsObservable().Subscribe(x =>
+        StartCoroutine(InitStateObservarable());
+    }
+
+    private IEnumerator InitStateObservarable()
+    {
+        yield return new WaitUntil(() => mech.IsReady);
+        this.FixedUpdateAsObservable().Subscribe(x =>
         {
+
             input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            //X = Input.GetAxis("Horizontal");
-            //Y = Input.GetAxis("Vertical");
             mech.movementHandler.Move(input);
         }
         );
