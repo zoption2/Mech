@@ -6,16 +6,20 @@ public class Stats
 {
     public Stats()
     {
-        MaxSpeed = 30f;
-        Acceleration = 300f;
+        Speed = 30f;
+        Acceleration = 1000f;
         RotationSpeed = 1.5f;
+        SlowDown = Speed;
+        engineGrade = 1;
+
         SpeedInCombat = 6;
-        SlowDown = MaxSpeed;
     }
 
-    public float MaxSpeed;
+    public float Speed;
     public float Acceleration;
+    public int engineGrade;
     public float SlowDown;
     public float RotationSpeed;
+
     public float SpeedInCombat;
 }

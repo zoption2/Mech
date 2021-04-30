@@ -15,18 +15,25 @@ public abstract class Movement
 
     public abstract void Move(Transform transform, Vector3 direction, Rigidbody rigidbody);
 
+
     protected float Accelerate(float currentSpeed)
     {
         float speed = currentSpeed;
-        speed += stats.Acceleration * Time.deltaTime;
+        float coef = 1 - (speed / stats.Speed);
+
+        if (speed < stats.Speed)
+        {
+           speed += stats.Acceleration * coef * Time.deltaTime;
+        }
         return speed;
     }
+
 
     protected float SlowDown(float currentSpeed)
     {
         var speed = currentSpeed;
         speed -= stats.SlowDown * Time.deltaTime;
-        speed = Mathf.Clamp(speed, 0, stats.MaxSpeed);
+        speed = Mathf.Clamp(speed, 0, stats.Speed);
         return speed;
     }
 

@@ -14,8 +14,8 @@ public class MoveControl : MonoBehaviour
     private void Start()
     {
         TryGetComponent<Mech>(out mech);
-        //StartObservable();
-        InitMoveObserverable();
+        StartObservable();
+        //InitMoveObserverable();
     }
 
     protected virtual void InitMoveObserverable()
