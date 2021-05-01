@@ -25,7 +25,7 @@ public class MovementHandler : MonoBehaviour, IMechComponent
     public void ConnectWithMech(Mech mech)
     {
         this.mech = mech;
-        mech.movementHandler = this;
+        mech.MovementHandler = this;
     }
 
     public void Setup()

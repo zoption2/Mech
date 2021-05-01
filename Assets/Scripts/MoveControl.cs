@@ -25,7 +25,7 @@ public class MoveControl : MonoBehaviour
                    .Subscribe(x =>
                    {
                        input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-                       mech.movementHandler.Move(input);
+                       mech.MovementHandler.Move(input);
                    });
     }
 
@@ -37,12 +37,20 @@ public class MoveControl : MonoBehaviour
     private IEnumerator InitStateObservarable()
     {
         yield return new WaitUntil(() => mech.IsReady);
+
         this.FixedUpdateAsObservable().Subscribe(x =>
         {
-
             input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            mech.movementHandler.Move(input);
+            mech.MovementHandler.Move(input);
         }
         );
+
+        this.FixedUpdateAsObservable()
+            .Where(x => Input.GetButtonDown("Fire1"))
+            .Subscribe(x =>
+            {
+                mech.targetHandler.GetClosestTarget();
+            }
+            );
     }
 }

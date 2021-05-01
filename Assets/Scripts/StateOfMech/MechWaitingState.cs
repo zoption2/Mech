@@ -16,7 +16,7 @@ public class MechWaitingState : MechNonCombatState
         base.LogicUpdate();
         if (inputs != Vector3.zero)
         {
-            character.stateHandler.ChangeState(MechStates.Moving);
+            character.StateHandler.ChangeState(MechStates.Moving);
         }
     }
 }

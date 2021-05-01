@@ -7,17 +7,26 @@ using UnityEngine.Events;
 [RequireComponent(typeof(MechStateHandler))]
 [RequireComponent(typeof(MechAnimationHandler))]
 [RequireComponent(typeof(StatsHandler))]
+[RequireComponent(typeof(TargetHandler))]
 
 public class Mech : Character
 {
     public UnityAction<MechStates> OnStateChange;
 
-    [HideInInspector] public MovementHandler movementHandler;
-    [HideInInspector] public MechStateHandler stateHandler;
+    [HideInInspector] public MovementHandler MovementHandler;
+    [HideInInspector] public MechStateHandler StateHandler;
     [HideInInspector] public MechAnimationHandler animationHandler;
     [HideInInspector] public StatsHandler statsHandler;
+    [HideInInspector] public TargetHandler targetHandler;
 
+    [HideInInspector] public PersonalHolder holder;
+    
     public bool IsReady = false;
+
+    public Stats Stats 
+    { 
+        get => statsHandler.Stats; 
+    }
 
     private void Start()
     {
@@ -26,7 +35,7 @@ public class Mech : Character
 
     public MechStates GetCurrentState()
     {
-        return stateHandler.CurrentState;
+        return StateHandler.CurrentState;
     }
   
     private void InitiateComponents()
@@ -37,5 +46,4 @@ public class Mech : Character
         components.ForEach(s => s.Setup());
         IsReady = true;
     }
-
 }

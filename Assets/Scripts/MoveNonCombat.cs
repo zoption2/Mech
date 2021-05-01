@@ -9,21 +9,21 @@ public class MoveNonCombat : Movement
 
     }
 
-    public override void Move(Transform transform, Vector3 direction, Rigidbody rigidbody)
+    public override void Move(Transform transform, Vector3 inputVector, Rigidbody rigidbody)
     {
+        Vector3 inputNormalized = inputVector.normalized;
+        float inputMagnitude = Mathf.Abs(inputNormalized.magnitude);
         float currentSpeed = rigidbody.velocity.magnitude;
+        Vector3 moveDirection = rigidbody.velocity.normalized;
 
-        Vector3 normaDir = direction.normalized;
-        float input = Mathf.Abs(normaDir.magnitude);
-
-        if (input > 0.2f)
+        if (inputMagnitude > 0.2f)
         {
             currentSpeed = stats.Speed;
-            DoRotation(transform, normaDir, stats.RotationSpeed);
+            moveDirection = inputNormalized;
         }
 
+        DoRotation(transform, moveDirection, stats.RotationSpeed);
 
-        rigidbody.AddForce(normaDir * currentSpeed, ForceMode.Acceleration);
-        Debug.Log("Current speed = " + currentSpeed);
+        rigidbody.AddForce(inputNormalized * currentSpeed, ForceMode.Acceleration);
     }
 }

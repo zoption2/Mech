@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: MechAssets
+  m_EditorClassIdentifier: 
+  m_GroupName: MechAssets
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 3dedbabf709836a478ad893c389dce7e
+  m_SerializeEntries:
+  - m_GUID: 4ab1a5eef0616764b872c7fb64d2a8cf
+    m_Address: Assets/Prefabs/TargetSelection.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 57c71f168f66269479fe3107f4b3e888, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4f8c80efe9993fb4e9b1117b07fbaa64, type: 2}
+    - {fileID: 11400000, guid: 1ae3cc9867adff8449d8a98980991f20, type: 2}

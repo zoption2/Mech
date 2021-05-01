@@ -3,28 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class FieldOfView : MonoBehaviour
+public class TargetHandler : MonoBehaviour, IMechComponent
 {
     public UnityAction OnTargetChange;
+
+    private Mech mech;
 
     private GameObject thisShip;
     private List<ITargetable> observableObjects;
     private GameObject currentTarget;
-   // private ShipStats stats;
-    private float radiusOfVision = 1f;
-    private int targetableLayer = 8;
 
-    private void DoTargetChange()
+    private const int DETECTION_LAYER = 1 << 8;
+
+
+    public void ConnectWithMech(Mech mech)
     {
-        OnTargetChange?.Invoke();
+        this.mech = mech;
+        mech.targetHandler = this;
     }
 
-    private void Start()
+    public void Setup()
     {
-        observableObjects = new List<ITargetable>();
-        thisShip = gameObject;
-        //stats = GetComponent<Ship>().Stats;
-        SetRadiusOfVision(10);
+        SetRadiusOfVision(mech.statsHandler.Stats.RadiusOfVision);
     }
 
 
@@ -35,6 +35,8 @@ public class FieldOfView : MonoBehaviour
 
     public void ChangeCurrentTarget()
     {
+        FindTargets();
+
         var countOfTargets = observableObjects.Count;
         var randomValue = Random.Range(0, countOfTargets - 1);
         var newTarget = observableObjects[randomValue];
@@ -43,6 +45,8 @@ public class FieldOfView : MonoBehaviour
 
     public void GetClosestTarget()
     {
+        FindTargets();
+
         if (observableObjects.Count <= 0)
         {
             return;
@@ -63,26 +67,27 @@ public class FieldOfView : MonoBehaviour
             }
         }
 
-        if (closest != null)
-        {
-            SetCurrentTarget(closest);
-        }
+        SetCurrentTarget(closest);
+
+        Debug.Log("ENEMY - " + GetCurrentTarget().name);
     }
 
     public void SetRadiusOfVision(float radius)
     {
-        radiusOfVision = radius;
+        mech.Stats.RadiusOfVision = radius;
     }
 
-    public void TryFindTargets()
+    public void FindTargets()
     {
         observableObjects = new List<ITargetable>();
 
-        var targets = Physics.OverlapSphere(transform.position, radiusOfVision, targetableLayer);
-        foreach (var item in targets)
+        Collider[] targets = new Collider[10];
+        int finded = Physics.OverlapSphereNonAlloc(transform.position, mech.Stats.RadiusOfVision, targets, DETECTION_LAYER);
+
+        for (int i = 0; i < finded; i++)
         {
-            item.gameObject.TryGetComponent(out ITargetable target);
-            if (target != null ) //&& target.GetTeam() != stats.Team)
+            var target = targets[i].gameObject.GetComponentInParent<ITargetable>();
+            if (target != null && target.GetTarget() != this.gameObject) //&& target.GetTeam() != stats.Team)
             {
                 observableObjects.Add(target);
             }
@@ -91,10 +96,17 @@ public class FieldOfView : MonoBehaviour
 
     private void SetCurrentTarget(ITargetable target)
     {
-        var choosenTarget = target.GetTarget();
-        currentTarget = choosenTarget;
+        currentTarget = target.GetTarget();
+        target.InformAboutTargeting();
+
         DoTargetChange();
     }
+
+    private void DoTargetChange()
+    {
+        OnTargetChange?.Invoke();
+    }
+
 }
 
 

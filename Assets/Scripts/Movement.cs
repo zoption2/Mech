@@ -28,16 +28,6 @@ public abstract class Movement
         return speed;
     }
 
-
-    protected float SlowDown(float currentSpeed)
-    {
-        var speed = currentSpeed;
-        speed -= stats.SlowDown * Time.deltaTime;
-        speed = Mathf.Clamp(speed, 0, stats.Speed);
-        return speed;
-    }
-
-
     protected void DoRotation(Transform transform, Vector3 direction, float rotationSpeed)
     {
         var angle = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);

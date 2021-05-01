@@ -10,16 +10,20 @@ public class Stats
         Acceleration = 1000f;
         RotationSpeed = 1.5f;
         SlowDown = Speed;
-        engineGrade = 1;
+        EngineGrade = 1;
 
         SpeedInCombat = 6;
+
+        RadiusOfVision = 50f;
     }
 
     public float Speed;
     public float Acceleration;
-    public int engineGrade;
+    public int EngineGrade;
     public float SlowDown;
     public float RotationSpeed;
 
     public float SpeedInCombat;
+
+    public float RadiusOfVision;
 }

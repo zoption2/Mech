@@ -24,7 +24,7 @@ public class MechStateHandler : MonoBehaviour, IMechComponent
     public void ConnectWithMech(Mech mech)
     {
         this.mech = mech;
-        mech.stateHandler = this;
+        mech.StateHandler = this;
     }
 
     public void Setup()
