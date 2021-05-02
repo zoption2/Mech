@@ -89,11 +89,6 @@ public class MechStateHandler : MonoBehaviour, IMechComponent
         stateMachine.CurrentState.LogicUpdate();
     }
 
-    public void PhysicUpdate()
-    {
-        stateMachine.CurrentState.PhysicsUpdate();
-    }
-
     private void DoOnStateChange()
     {
         mech.OnStateChange?.Invoke(CurrentState);
