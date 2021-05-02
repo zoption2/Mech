@@ -77,7 +77,7 @@ public class TargetHandler : MonoBehaviour, IMechComponent
         mech.Stats.RadiusOfVision = radius;
     }
 
-    public void FindTargets()
+    private void FindTargets()
     {
         observableObjects = new List<ITargetable>();
 

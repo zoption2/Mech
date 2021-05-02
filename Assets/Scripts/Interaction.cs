@@ -23,6 +23,6 @@ public class Interaction : MonoBehaviour, IMechComponent, ITargetable
 
     public void InformAboutTargeting()
     {
-        
+        mech.holder.Activate(PersonalHolder.Items.SelectingCircle);
     }
 }
