@@ -28,5 +28,10 @@ public class MoveNonCombat : MovementState
         DoRotation(transform, moveDirection, stats.RotationSpeed);
 
         rigidbody.AddForce(inputNormalized * currentSpeed, ForceMode.Acceleration);
+
+        if (currentSpeed < stats.Speed/10)
+        {
+            character.StateHandler.ChangeState(MechStates.Waiting);
+        }
     }
 }

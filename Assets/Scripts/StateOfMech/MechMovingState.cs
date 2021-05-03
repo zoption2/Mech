@@ -11,4 +11,10 @@ public class MechMovingState : MechNonCombatState
 
     }
 
+    protected override void SwitchMovement()
+    {
+        base.SwitchMovement();
+        character.MovementHandler.ChangeState(Movements.Moving);
+    }
+
 }

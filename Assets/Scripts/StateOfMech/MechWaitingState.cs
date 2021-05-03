@@ -10,4 +10,10 @@ public class MechWaitingState : MechNonCombatState
     {
 
     }
+
+    protected override void SwitchMovement()
+    {
+        base.SwitchMovement();
+        character.MovementHandler.ChangeState(Movements.Standing);
+    }
 }

@@ -20,16 +20,16 @@ public class MechNonCombatState : MechState
 
     protected override void SwitchControl()
     {
-        throw new System.NotImplementedException();
+       // throw new System.NotImplementedException();
     }
 
     protected override void SwitchAnimation()
     {
-        throw new System.NotImplementedException();
+       // throw new System.NotImplementedException();
     }
 
     protected override void SwitchMovement()
     {
-        throw new System.NotImplementedException();
+       // throw new System.NotImplementedException();
     }
 }

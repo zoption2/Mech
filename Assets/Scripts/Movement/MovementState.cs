@@ -9,6 +9,8 @@ public abstract class MovementState : State
     protected new MoveStateMachine stateMachine;
     protected Stats stats;
 
+    protected const float MIN_INPUT_VALUE = 0.2f;
+
     public abstract Movements State { get; }
 
     public MovementState(Mech character, MoveStateMachine stateMachine) : base(character, stateMachine)

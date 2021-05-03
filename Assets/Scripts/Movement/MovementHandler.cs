@@ -12,6 +12,7 @@ public class MovementHandler : MonoBehaviour, IMechComponent
     private MoveStateMachine stateMachine;
 
     private MoveNonCombat s_MoveNonCombat;
+    private Standing s_standing;
 
 
 
@@ -38,7 +39,10 @@ public class MovementHandler : MonoBehaviour, IMechComponent
     {
         stateMachine = new MoveStateMachine();
 
+        s_standing = new Standing(mech, stateMachine);
         s_MoveNonCombat = new MoveNonCombat(mech, stateMachine);
+
+        stateMachine.Initialize(s_standing);
     }
 
     public void Move(Vector3 direction)
@@ -51,6 +55,7 @@ public class MovementHandler : MonoBehaviour, IMechComponent
         switch (state)
         {
             case Movements.Standing:
+                stateMachine.ChangeState(s_standing);
                 break;
             case Movements.Moving:
                 stateMachine.ChangeState(s_MoveNonCombat);
