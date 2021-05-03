@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveNonCombat : Movement
+public class MoveNonCombat : MovementState
 {
-    public MoveNonCombat(Stats stats) : base(stats)
+    public override Movements State => Movements.Moving;
+
+    public MoveNonCombat(Mech character, MoveStateMachine stateMachine) : base(character, stateMachine)
     {
 
     }
 
+ 
     public override void Move(Transform transform, Vector3 inputVector, Rigidbody rigidbody)
     {
         Vector3 inputNormalized = inputVector.normalized;

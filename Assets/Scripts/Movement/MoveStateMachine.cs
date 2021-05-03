@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MechStateMachine : StateMachine
+public class MoveStateMachine : StateMachine
 {
-    public new MechState CurrentState;
+    public new MovementState CurrentState;
 
-    private MechStates state;
-    public MechStates State 
+    private Movements state;
+    public Movements State
     {
         get => state;
         private set => state = value;
     }
 
-
-    public virtual void Initialize(MechState startingState) 
+    public virtual void Initialize(MovementState startingState)
     {
         CurrentState = startingState;
         startingState.Enter();
         State = startingState.State;
     }
 
-    public virtual void ChangeState(MechState newState)
+    public void ChangeState(MovementState newState)
     {
         CurrentState.Exit();
         CurrentState = newState;

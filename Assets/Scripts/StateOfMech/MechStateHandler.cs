@@ -6,8 +6,8 @@ public class MechStateHandler : MonoBehaviour, IMechComponent
 {
 
     private Mech mech;
-
     private MechStateMachine stateMachine;
+
     private MechNonCombatState s_nonCombat;
     private MechCombatState s_combat;
     private MechWaitingState s_waiting;
@@ -41,6 +41,8 @@ public class MechStateHandler : MonoBehaviour, IMechComponent
 
         stateMachine.Initialize(s_waiting);
     }
+
+
 
     public void ChangeState(MechStates state)
     {
@@ -79,15 +81,6 @@ public class MechStateHandler : MonoBehaviour, IMechComponent
     }
 
 
-    private void Update()
-    {
-        LogicUpdate();
-    }
-
-    public void LogicUpdate()
-    {
-        stateMachine.CurrentState.LogicUpdate();
-    }
 
     private void DoOnStateChange()
     {

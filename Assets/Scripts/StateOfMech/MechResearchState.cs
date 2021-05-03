@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MechResearchState : MechNonCombatState
 {
-    public MechResearchState(Mech character, StateMachine stateMachine) : base(character, stateMachine)
+    public MechResearchState(Mech character, MechStateMachine stateMachine) : base(character, stateMachine)
     {
 
     }

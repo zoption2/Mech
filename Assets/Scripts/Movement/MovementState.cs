@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class Movement
+public abstract class MovementState : State
 {
-    public Movement(Stats stats)
-    {
-        this.stats = stats;
-    }
-
+    protected new Mech character;
+    protected new MoveStateMachine stateMachine;
     protected Stats stats;
 
+    public abstract Movements State { get; }
+
+    public MovementState(Mech character, MoveStateMachine stateMachine) : base(character, stateMachine)
+    {
+        this.character = character;
+        this.stateMachine = stateMachine;
+        stats = character.statsHandler.Stats;
+    }
 
     public abstract void Move(Transform transform, Vector3 direction, Rigidbody rigidbody);
 

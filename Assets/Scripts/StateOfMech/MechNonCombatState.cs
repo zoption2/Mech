@@ -13,8 +13,23 @@ public class MechNonCombatState : MechState
     private bool isAttack;
     private bool isMoving;
 
-    public MechNonCombatState(Mech character, StateMachine stateMachine) : base(character, stateMachine)
+    public MechNonCombatState(Mech character, MechStateMachine stateMachine) : base(character, stateMachine)
     {
 
+    }
+
+    protected override void SwitchControl()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void SwitchAnimation()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void SwitchMovement()
+    {
+        throw new System.NotImplementedException();
     }
 }

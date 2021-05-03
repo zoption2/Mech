@@ -24,11 +24,6 @@ public abstract class State
         DebugTest();
     }
 
-    public virtual void LogicUpdate()
-    {
-
-    }
-
     public virtual void Exit()
     {
 

@@ -4,10 +4,27 @@ using UnityEngine;
 
 public class MechStasisState : MechState
 {
-    public MechStasisState(Mech character, StateMachine stateMachine) : base(character, stateMachine)
+    public override MechStates State => MechStates.Stasis;
+
+    public MechStasisState(Mech character, MechStateMachine stateMachine) : base(character, stateMachine)
     {
 
     }
 
-    public override MechStates State => MechStates.Stasis;
+
+
+    protected override void SwitchAnimation()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void SwitchControl()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void SwitchMovement()
+    {
+        throw new System.NotImplementedException();
+    }
 }
