@@ -23,9 +23,4 @@ public class Selection : MonoBehaviour
     {
         transform.DOLocalRotate(transform.up * 3.6f, 0.1f, RotateMode.LocalAxisAdd).onComplete += Rotate;
     }
-
-    private void OnDisable()
-    {
-        transform.DOLocalRotate(transform.up * 3.6f, 0.1f, RotateMode.LocalAxisAdd).onComplete -= Rotate;
-    }
 }

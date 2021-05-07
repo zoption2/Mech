@@ -1,0 +1,77 @@
+{
+    "name": "MechControl",
+    "maps": [
+        {
+            "name": "Mech",
+            "id": "a9c6b8b1-a3b0-463c-bdb0-0919803dbaa8",
+            "actions": [
+                {
+                    "name": "Movement",
+                    "type": "Value",
+                    "id": "81b88381-ad26-4c19-8a86-0bede56d58c3",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "AIM",
+                    "type": "Value",
+                    "id": "4cebd8e8-1af7-4bbe-819a-5d3ccc085029",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Button_A",
+                    "type": "Button",
+                    "id": "7e828544-09f0-4c86-9dfb-016b5eab8daa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fd2086a4-a4ce-4cd5-9b4e-6e9acedf2618",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MechControls",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e9e63e9f-0643-4a67-8197-25e0755441e5",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MechControls",
+                    "action": "AIM",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cc70fed-6cd0-4550-97eb-2449d1bd7478",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MechControls",
+                    "action": "Button_A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "MechControls",
+            "bindingGroup": "MechControls",
+            "devices": []
+        }
+    ]
+}

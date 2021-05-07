@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Standing : MovementState
+public class Standing : Movement
 {
-    public Standing(Mech character, MoveStateMachine stateMachine) : base(character, stateMachine)
+    public Standing(Mech mech) : base(mech)
     {
 
     }
-
     public override Movements State => Movements.Standing;
 
     public override void Move(Transform transform, Vector3 direction, Rigidbody rigidbody)
@@ -16,7 +15,7 @@ public class Standing : MovementState
         var input = direction.normalized.magnitude;
         if (input > MIN_INPUT_VALUE)
         {
-            character.StateHandler.ChangeState(MechStates.Moving);
+            mech.StateHandler.ChangeState(MechStates.Moving);
         }
     }
 }

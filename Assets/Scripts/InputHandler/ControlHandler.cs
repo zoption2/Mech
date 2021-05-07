@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interaction : MonoBehaviour, IMechComponent, ITargetable
+public class ControlHandler : MonoBehaviour, IMechComponent
 {
     private Mech mech;
 
     public void ConnectWithMech(Mech mech)
     {
         this.mech = mech;
+        //mech.InputHandler = this;
     }
 
     public void Setup()
@@ -16,13 +17,9 @@ public class Interaction : MonoBehaviour, IMechComponent, ITargetable
         
     }
 
-    public GameObject GetTarget()
+    public enum ControlSets
     {
-        return gameObject;
-    }
-
-    public void InformAboutTargeting()
-    {
-        mech.holder.GetItem("Selection");
+        NonCombat,
+        Combat
     }
 }

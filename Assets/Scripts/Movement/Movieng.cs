@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveNonCombat : MovementState
+public class Movieng : Movement
 {
-    public override Movements State => Movements.Moving;
-
-    public MoveNonCombat(Mech character, MoveStateMachine stateMachine) : base(character, stateMachine)
+    public Movieng(Mech mech) : base(mech)
     {
 
     }
 
- 
+    public override Movements State => Movements.Moving;
+
+
     public override void Move(Transform transform, Vector3 inputVector, Rigidbody rigidbody)
     {
         Vector3 inputNormalized = inputVector.normalized;
@@ -31,7 +31,7 @@ public class MoveNonCombat : MovementState
 
         if (currentSpeed < stats.Speed/10)
         {
-            character.StateHandler.ChangeState(MechStates.Waiting);
+            mech.StateHandler.ChangeState(MechStates.Waiting);
         }
     }
 }

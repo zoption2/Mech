@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class MovementState : State
+public abstract class Movement
 {
-    protected new Mech character;
-    protected new MoveStateMachine stateMachine;
+    protected Mech mech;
     protected Stats stats;
 
     protected const float MIN_INPUT_VALUE = 0.2f;
 
     public abstract Movements State { get; }
 
-    public MovementState(Mech character, MoveStateMachine stateMachine) : base(character, stateMachine)
+    public Movement(Mech mech)
     {
-        this.character = character;
-        this.stateMachine = stateMachine;
-        stats = character.statsHandler.Stats;
+        this.mech = mech;
+        stats = mech.statsHandler.Stats;
     }
 
     public abstract void Move(Transform transform, Vector3 direction, Rigidbody rigidbody);

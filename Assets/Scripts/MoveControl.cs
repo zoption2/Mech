@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
+using UnityEngine.InputSystem;
 
 
 public class MoveControl : MonoBehaviour
 {
     private Vector3 input;
     private Mech mech;
+    private Gamepad gamepad;
 
 
     private void Start()
@@ -16,6 +18,7 @@ public class MoveControl : MonoBehaviour
         TryGetComponent<Mech>(out mech);
         StartObservable();
         //InitMoveObserverable();
+        gamepad = Gamepad.all[0];
     }
 
     protected virtual void InitMoveObserverable()
@@ -40,16 +43,25 @@ public class MoveControl : MonoBehaviour
 
         this.FixedUpdateAsObservable().Subscribe(x =>
         {
-            input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            //input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            input = new Vector3(gamepad.leftStick.ReadValue().x, 0, gamepad.leftStick.ReadValue().y);
             mech.MovementHandler.Move(input);
         }
         );
 
         this.FixedUpdateAsObservable()
-            .Where(x => Input.GetButtonDown("Fire1"))
+            .Where(x => gamepad.buttonSouth.isPressed)
             .Subscribe(x =>
             {
                 mech.targetHandler.GetClosestTarget();
+            }
+            );
+
+        this.FixedUpdateAsObservable()
+            .Where(x => gamepad.buttonEast.isPressed)
+            .Subscribe(x =>
+            {
+                mech.holder.Deactivate("Selection");
             }
             );
     }

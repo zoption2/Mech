@@ -10,19 +10,10 @@ public class PersonalHolder : MonoBehaviour, IMechComponent
     [SerializeField] private List<Arsenal> items;
 
     private Mech mech;
+    private Dictionary<string, AssetReference> holder;
 
-    private Dictionary<Items, GameObject> gameObject_holder;
+    private Dictionary<string, GameObject> activeItems = new Dictionary<string, GameObject>();
 
-    [SerializeField]
-    public enum Items
-    {
-        SelectingCircle
-    }
-
-    private void Awake()
-    {
-        FillHolder();
-    }
 
     public void ConnectWithMech(Mech mech)
     {
@@ -35,32 +26,78 @@ public class PersonalHolder : MonoBehaviour, IMechComponent
         FillHolder();
     }
 
-    public void Activate(Items item)
+    public void GetItem(string item)
     {
-        gameObject_holder[item].SetActive(true);
+        StartCoroutine(c_getItem(item));
     }
 
-    public GameObject GetItem(Items item)
+    private IEnumerator c_getItem(string item)
     {
-        return gameObject_holder[item];
+        Activate(item);
+        var isExist = activeItems.ContainsKey(item);
+        if (!isExist)
+        {
+            StopCoroutine(c_getItem(item));
+        }
+        else
+        {
+            yield return new WaitUntil(() => activeItems.ContainsKey(item));
+            Debug.Log("I got item " + item);
+
+            yield return new WaitUntil(() => !activeItems.ContainsKey(item));
+            Debug.Log("Now it's time to deactivate " + item);
+            StopCoroutine(c_getItem(item));
+        }
+    }
+
+    public void Activate(string item)
+    {
+        if (holder.ContainsKey(item) && !activeItems.ContainsKey(item))
+        {
+            StartCoroutine(c_itemWork(item));
+        }
+    }
+
+    public void Deactivate(string item)
+    {
+        if(activeItems.ContainsKey(item))
+        {
+            Addressables.Release<GameObject>(activeItems[item]);
+            activeItems.Remove(item);
+        }
     }
 
     private void FillHolder()
     {
-        gameObject_holder = new Dictionary<Items, GameObject>();
+        holder = new Dictionary<string, AssetReference>();
 
-        for (int i = 0; i < items.Count; i++)
+        int count = items.Count;
+        for (int i = 0; i < count; i++)
         {
-            gameObject_holder.Add(items[i].Item, items[i].Reference);
+            string name = items[i].Item;
+            if(!holder.ContainsKey(name))
+            {
+                holder.Add(name, items[i].Reference);
+            }
         }
     }
 
 
+    private IEnumerator c_itemWork(string item)
+    {
+        activeItems.Add(item, null);
+
+        AsyncOperationHandle<GameObject> waiter;
+        waiter = holder[item].InstantiateAsync(transform);
+        yield return new WaitUntil (()=> waiter.Result);
+        activeItems[item] = waiter.Result;
+    }
+    
 
     [System.Serializable]
-    private class Arsenal
+    public class Arsenal
     {
-        public Items Item;
-        public GameObject Reference;
+        public string Item;
+        public AssetReference Reference;
     }
 }
